@@ -1,4 +1,5 @@
 import './globals.css'; // Wichtig: Importiert deine Tailwind CSS Basis-Styles
+import { ReactNode } from 'react';
 
 // 1. METADATEN (Für Browser-Tab und Suchmaschinen)
 export const metadata = {
@@ -8,7 +9,9 @@ export const metadata = {
 }
 
 // 2. ROOT LAYOUT KOMPONENTE
-export default function RootLayout({ children }) {
+// Wir typisieren das children-Prop explizit mit ReactNode, um
+// TypeScript-Warnungen in Next.js 16 zu vermeiden.
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="de">
       <body className="flex flex-col min-h-screen">

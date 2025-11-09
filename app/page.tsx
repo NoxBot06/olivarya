@@ -28,8 +28,13 @@ export default function Home() {
         {/* Die Überschrift, die den Inhalt des Videos als Maske nutzt.
           Die Klasse 'video-masked-text' definiert diesen Effekt in globals.css.
         */}
-        <h1 
-          className="video-masked-text"
+        <h1
+          /*
+            Kombiniert den Video-Masken-Effekt mit den gewünschten Tailwind-
+            Schriftgrößen. Die Klassen werden im HTML angegeben, um `@apply`
+            im CSS zu vermeiden.
+          */
+          className="video-masked-text text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tight"
           // Setzt den Text-Glow direkt als Inline-Style für die einfache Farbkontrolle
           style={{ textShadow: `0 0 10px ${accentColor}, 0 0 20px ${accentColor}, 0 0 30px #fff` }}
         >
@@ -44,11 +49,16 @@ export default function Home() {
 
       {/* Login Button mit Neon-Glow */}
       <Link href="/login" passHref legacyBehavior>
-        <button 
-          className="login-button"
+        <button
+          /*
+            Die Utility-Klassen sorgen für Abstände, Rundung, Font-Stil und
+            Transition. Der Farbstil wird über die CSS-Klasse `login-button`
+            definiert und der Glow über Inline-Styles.
+          */
+          className="login-button px-10 py-3 rounded-full font-bold text-lg transition-all duration-300 ease-in-out cursor-pointer"
           // Setzt den Box-Glow für den Button
-          style={{ 
-            boxShadow: `0 0 10px ${accentColor}, 0 0 20px ${accentColor}, 0 0 40px rgba(140, 110, 200, 0.6)` 
+          style={{
+            boxShadow: `0 0 10px ${accentColor}, 0 0 20px ${accentColor}, 0 0 40px rgba(140, 110, 200, 0.6)`
           }}
         >
           Login
