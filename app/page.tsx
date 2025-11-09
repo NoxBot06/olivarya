@@ -1,63 +1,70 @@
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
 
+// Inter Schriftart laden
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const accentColor = "#8c6ec8";
 
   return (
-    // 'overflow-hidden' verhindert Scrollbalken durch das Video
+    // Hauptcontainer: Dunkler Hintergrund, fixiert auf Bildschirmhöhe, kein Scrollen durch übergroße Elemente
     <main className={`flex min-h-screen flex-col items-center justify-center w-full text-white overflow-hidden relative ${inter.className}`} style={{ backgroundColor: '#0a0015' }}>
       
-      {/* --- HINTERGRUND VIDEO BEREICH --- */}
+      {/* --- HINTERGRUND VIDEO --- */}
       <div className="absolute top-0 left-0 w-full h-full z-0">
-         {/* Das Video läuft im Hintergrund über den ganzen Screen */}
         <video 
           autoPlay 
           loop 
           muted 
           playsInline 
-          className="object-cover w-full h-full opacity-30" // Opacity steuert wie stark das Video zu sehen ist
+          // 'object-cover' sorgt dafür, dass das Video immer den ganzen Screen füllt ohne Verzerrung
+          className="object-cover w-full h-full opacity-30" 
           src="/glitch.mp4" 
         />
-        {/* Ein Overlay, damit der Text besser lesbar bleibt */}
-        <div className="absolute inset-0 bg-black opacity-80"></div>
+        {/* Dunkles Overlay über dem Video für besseren Kontrast */}
+        <div className="absolute inset-0 bg-black opacity-85"></div>
       </div>
 
-      {/* --- HAUPTINHALT (liegt über dem Video dank z-10) --- */}
-      <div className="relative z-10 flex flex-col items-center px-4">
+      {/* --- HAUPTINHALT --- */}
+      {/* z-10 hebt diesen Container über das Video */}
+      <div className="relative z-10 flex flex-col items-center px-4 text-center">
         
-        {/* 1. ÜBERSCHRIFT: Viel größer und enger zusammen (leading-none) */}
-        {/* lg:text-[10rem] ist ein manueller Wert für riesigen Text auf großen Screens */}
+        {/* RIESIGE ÜBERSCHRIFT */}
         <h1
-          className="text-7xl md:text-9xl lg:text-[11rem] font-extrabold tracking-tighter leading-none text-center text-transparent bg-clip-text" 
+          // Responsive Textgrößen: Klein auf Handy (text-5xl), riesig auf Desktop (xl:text-[13rem])
+          // 'whitespace-nowrap' zwingt den Text in eine Zeile
+          className="text-5xl sm:text-7xl md:text-9xl lg:text-[11rem] xl:text-[13rem] font-extrabold tracking-tighter leading-none text-transparent bg-clip-text whitespace-nowrap" 
           style={{ 
-             backgroundImage: 'linear-gradient(to bottom right, #8c6ec8, #fff, #8c6ec8)',
-             filter: 'drop-shadow(0 0 20px rgba(140, 110, 200, 0.4))'
+             // Verlauf von Weiß zu deinem Lila
+             backgroundImage: 'linear-gradient(to bottom right, #fff, #8c6ec8)',
+             // Leuchtender Drop-Shadow Effekt
+             filter: 'drop-shadow(0 0 25px rgba(140, 110, 200, 0.5))'
           }}
         >
-          QUALITÄT &gt;<br /> QUANTITÄT
+          QUALITÄT &gt; QUANTITÄT
         </h1>
 
-        {/* 2. BESCHREIBUNG: Schmaler (max-w-md) damit es mehr Zeilen werden */}
-        <p className="max-w-md text-center mt-12 mb-16 text-xl text-gray-300 leading-relaxed">
-          Die einzige Plattform, die wirklich versteht, dass Qualität &gt; Quantität steht.
-          <br className="hidden md:block" /> {/* Optionaler Zeilenumbruch für mittlere Screens */}
-          Der Ort, an dem die wahre Statistik über die letzten Niederlagen sicher verwahrt ist.
+        {/* BESCHREIBUNGSTEXT */}
+        {/* Kürzer und kompakter, max-w-[40rem] sorgt für den schönen Umbruch */}
+        <p className="max-w-[40rem] mt-8 md:mt-12 mb-12 md:mb-16 text-xl md:text-2xl text-gray-300 leading-relaxed">
+          Die einzige Plattform, die Qualität über Quantität stellt. 
+          Hier ist die wahre Statistik deiner letzten Niederlagen sicher.
         </p>
 
-        {/* 3. LOGIN BUTTON */}
+        {/* LOGIN BUTTON */}
         <Link href="/login" passHref legacyBehavior>
-            <a className="group relative px-14 py-5 font-bold text-2xl rounded-full overflow-hidden transition-all duration-300 hover:scale-105"
+            <a className="group relative px-12 py-4 md:px-16 md:py-6 font-bold text-xl md:text-2xl rounded-full overflow-hidden transition-transform duration-300 hover:scale-105 active:scale-95"
                style={{
                    color: '#fff',
                    border: `3px solid ${accentColor}`,
-                   boxShadow: `0 0 20px ${accentColor}40` // 40 am Ende ist für Transparenz
+                   // Glow-Effekt um den Button
+                   boxShadow: `0 0 30px ${accentColor}50`
                }}>
-                {/* Button Hintergrund-Animation */}
-                <div className="absolute inset-0 w-full h-full bg-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-                <span className="relative z-10 drop-shadow-[0_0_10px_rgba(140,110,200,0.8)]">
+                {/* Hover-Effekt Füllung */}
+                <div className="absolute inset-0 w-full h-full bg-purple-600 opacity-0 group-hover:opacity-25 transition-opacity duration-500"></div>
+                {/* Button Text */}
+                <span className="relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]">
                   Login
                 </span>
             </a>
