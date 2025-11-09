@@ -37,42 +37,25 @@ body {
   background-color: var(--bg-dark);
 }
 
-/* WICHTIG: Alle Custom-Klassen, die @apply nutzen, kommen in diesen Block */
-@layer components {
-    /* Login Button Styling (mit Glow) */
-    .login-button {
-      /* Alle Tailwind Utility Classes MÜSSEN in @apply stehen! */
-      @apply px-10 py-3 rounded-full font-bold text-lg transition-all duration-300 ease-in-out cursor-pointer;
-      
-      /* Native CSS */
-      background-color: var(--neon-purple);
-      color: #fff;
-      border: 2px solid var(--neon-purple);
-    }
+/* Login Button Styling (mit Glow) */
+.login-button {
+  /* Alle Tailwind Utility Classes */
+  @apply px-10 py-3 rounded-full font-bold text-lg transition-all duration-300 ease-in-out cursor-pointer;
+  
+  /* Native CSS */
+  background-color: var(--neon-purple);
+  color: #fff;
+  border: 2px solid var(--neon-purple);
+}
 
-    .login-button:hover {
-      background-color: transparent;
-      color: var(--neon-purple);
-      box-shadow: 0 0 5px var(--neon-purple) !important; 
-    }
-
-    /* Video Text Masking Styling */
-    .video-masked-text {
-      @apply text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tight;
-      
-      background: url('/glitch.mp4') no-repeat;
-      background-size: cover; 
-      background-position: center;
-      
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent; 
-    }
-} /* Ende @layer components */
+.login-button:hover {
+  background-color: transparent;
+  color: var(--neon-purple);
+  box-shadow: 0 0 5px var(--neon-purple) !important; 
+}
 
 
-/* Video-Hintergrund (kein @apply nötig, daher außerhalb des Layers) */
+/* Video Text Masking Styling */
 .video-background {
   position: absolute;
   top: 50%;
@@ -84,4 +67,17 @@ body {
   z-index: -1;
   transform: translate(-50%, -50%);
   object-fit: cover; 
+}
+
+.video-masked-text {
+  @apply text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tight;
+  
+  background: url('/glitch.mp4') no-repeat;
+  background-size: cover; 
+  background-position: center;
+  
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent; 
 }
