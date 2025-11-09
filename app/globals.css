@@ -2,19 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Die folgenden Standard-Styles sollten normalerweise von Next.js generiert werden */
+/* Die Standard-Styles von Next.js, die Tailwind benötigen */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
 }
 
 body {
@@ -33,47 +25,41 @@ body {
   }
 }
 
-/* --- HIER BEGINNEN DIE SPEZIFISCHEN KARDIASHUMI-STYLES --- */
+/* --- KARDIASHUMI-STYLES --- */
 
-/* --- Globale Design-Variablen und Background --- */
+/* Globale Design-Variablen */
 :root {
-  /* Ihr gewählter Lila-Akzent */
   --neon-purple: #8c6ec8; 
-  /* Dunkler, fast schwarzer Hintergrund */
   --bg-dark: #120a1f; 
 }
 
-/* Überschreibt den Standard-Body-Hintergrund mit dem sehr dunklen Ton */
 body {
   background-color: var(--bg-dark);
 }
 
-/* --- Login Button Styling (mit Glow) --- */
+/* Login Button Styling (mit Glow) */
 .login-button {
+  /* Alle Tailwind Utility Classes */
   @apply px-10 py-3 rounded-full font-bold text-lg transition-all duration-300 ease-in-out cursor-pointer;
+  
+  /* Native CSS */
   background-color: var(--neon-purple);
   color: #fff;
   border: 2px solid var(--neon-purple);
-  /* Der coole Glow-Effekt wird direkt im page.js als Inline-Style gesetzt */
 }
 
 .login-button:hover {
   background-color: transparent;
   color: var(--neon-purple);
-  /* Leichter, subtiler Box-Shadow-Effekt beim Hover */
   box-shadow: 0 0 5px var(--neon-purple) !important; 
 }
 
 
-/* --- Video Text Masking Styling --- */
-
-/* Der Container des Videos wird auf die Größe des Titels skaliert */
+/* Video Text Masking Styling */
 .video-background {
-  /* Positioniert das Video relativ zum umgebenden div.relative */
   position: absolute;
   top: 50%;
   left: 50%;
-  /* Stellt sicher, dass das Video den gesamten Textbereich abdeckt */
   min-width: 100%;
   min-height: 100%;
   width: auto;
@@ -83,22 +69,15 @@ body {
   object-fit: cover; 
 }
 
-/* Der eigentliche Video-Masking-Effekt auf dem H1-Element */
 .video-masked-text {
-  /* Textgröße für Auffälligkeit */
   @apply text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tight;
   
-  /* WICHTIG: Definiert, dass der Hintergrund (das Video) durch den Text scheinen soll */
-  /* Das ist der Schlüssel zum Text-Masking! */
   background: url('/glitch.mp4') no-repeat;
   background-size: cover; 
   background-position: center;
   
-  /* Die magischen CSS-Eigenschaften */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: transparent; /* Versteckt den Text selbst, damit nur das Video sichtbar ist */
-  
-  /* Der Glow-Effekt wird in page.js als Style definiert */
+  color: transparent; 
 }
