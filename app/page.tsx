@@ -8,14 +8,11 @@ export default function Home() {
   const accentColor = "#8c6ec8"; // Ihr gewählter HEX-Code
 
   return (
-    <main className={`flex min-h-screen flex-col items-center justify-center p-8 bg-black text-white ${inter.className}`}>
+    <main className={`flex min-h-screen flex-col items-center justify-center w-full bg-black text-white ${inter.className}`}>
       
-      {/* Container für den Titel mit Video-Maskierung
-        Die Animation wird über CSS in globals.css gesteuert
-      */}
-      <div className="relative z-10 text-center">
+      {/* Container für den Titel mit Video-Maskierung */}
+      <div className="relative z-10 text-center p-8"> 
         {/* Das Video-Element für die Maskierung */}
-        {/* WICHTIG: Die Quelle (src) zeigt auf /glitch.mp4 im public-Ordner */}
         <video 
           autoPlay 
           loop 
@@ -25,18 +22,13 @@ export default function Home() {
           src="/glitch.mp4" 
         />
 
-        {/* Die Überschrift, die den Inhalt des Videos als Maske nutzt.
-          Die Klasse 'video-masked-text' definiert diesen Effekt in globals.css.
+        {/* Die Überschrift. Die Klasse 'video-masked-text' enthält nun 
+          alle Text-Styles und den Neon-Glow.
         */}
         <h1
-          /*
-            Kombiniert den Video-Masken-Effekt mit den gewünschten Tailwind-
-            Schriftgrößen. Die Klassen werden im HTML angegeben, um `@apply`
-            im CSS zu vermeiden.
-          */
-          className="video-masked-text text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tight"
-          // Setzt den Text-Glow direkt als Inline-Style für die einfache Farbkontrolle
-          style={{ textShadow: `0 0 10px ${accentColor}, 0 0 20px ${accentColor}, 0 0 30px #fff` }}
+          className="video-masked-text" 
+          // Optional: Filter, um die Video-Helligkeit im Text zu erhöhen 
+          style={{ filter: 'brightness(1.5)' }} 
         >
           QUALITÄT &gt; QUANTITÄT
         </h1>
@@ -50,12 +42,7 @@ export default function Home() {
       {/* Login Button mit Neon-Glow */}
       <Link href="/login" passHref legacyBehavior>
         <button
-          /*
-            Die Utility-Klassen sorgen für Abstände, Rundung, Font-Stil und
-            Transition. Der Farbstil wird über die CSS-Klasse `login-button`
-            definiert und der Glow über Inline-Styles.
-          */
-          className="login-button px-10 py-3 rounded-full font-bold text-lg transition-all duration-300 ease-in-out cursor-pointer"
+          className="login-button" // Nutzt die korrigierte Klasse, die alle Abstände enthält
           // Setzt den Box-Glow für den Button
           style={{
             boxShadow: `0 0 10px ${accentColor}, 0 0 20px ${accentColor}, 0 0 40px rgba(140, 110, 200, 0.6)`

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Die Standard-Styles von Next.js, die Tailwind benötigen */
+/* Die Standard-Styles von Next.js */
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 0, 0, 0;
@@ -11,12 +11,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-start-rgb)); 
 }
 
 @layer utilities {
@@ -37,27 +32,46 @@ body {
   background-color: var(--bg-dark);
 }
 
-/* Login Button Styling (mit Glow) */
-/*
-  Entferne die Tailwind-Utilities aus der CSS-Datei, um `@apply` zu vermeiden.
-  Die Abstände, Rundungen und Übergangseffekte werden stattdessen direkt
-  im JSX als Klassen angegeben.  Hier definieren wir nur die Farbstile.
-*/
-.login-button {
-  background-color: var(--neon-purple);
-  color: #fff;
-  border: 2px solid var(--neon-purple);
-}
+/* WICHTIG: Alle Custom-Klassen, die @apply nutzen, kommen in diesen Block (FIX FÜR VERCEL BUILD ERROR) */
+@layer components {
+    /* Login Button Styling (mit Glow) */
+    .login-button {
+      /* Alle Tailwind Utility Classes MÜSSEN in @apply stehen! */
+      @apply px-10 py-3 rounded-full font-bold text-lg transition-all duration-300 ease-in-out cursor-pointer;
+      
+      /* Native CSS */
+      background-color: var(--neon-purple);
+      color: #fff;
+      border: 2px solid var(--neon-purple);
+    }
 
-/* Hover-Stil für den Login-Button */
-.login-button:hover {
-  background-color: transparent;
-  color: var(--neon-purple);
-  box-shadow: 0 0 5px var(--neon-purple) !important;
-}
+    .login-button:hover {
+      background-color: transparent;
+      color: var(--neon-purple);
+      box-shadow: 0 0 5px var(--neon-purple) !important; 
+    }
+
+    /* Video Text Masking Styling (Titel) */
+    .video-masked-text {
+      /* Wir fügen die Text-Utilities hier in @apply hinzu, um sie im Layer zu haben */
+      @apply text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tight; 
+      
+      background: url('/glitch.mp4') no-repeat;
+      background-size: cover; 
+      background-position: center;
+      
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent; 
+      
+      /* NEU: Weniger intensiver Glow, um die Unschärfe zu beheben */
+      text-shadow: 0 0 5px var(--neon-purple), 0 0 10px var(--neon-purple);
+    }
+} /* Ende @layer components */
 
 
-/* Video Text Masking Styling */
+/* Video-Hintergrund (kein @apply nötig, daher außerhalb des Layers) */
 .video-background {
   position: absolute;
   top: 50%;
@@ -69,19 +83,4 @@ body {
   z-index: -1;
   transform: translate(-50%, -50%);
   object-fit: cover; 
-}
-
-/*
-  Video-Maskierung: Nur der eigentliche Video-Masken-Effekt wird hier
-  definiert. Schriftgrößen und andere typografische Einstellungen
-  werden im JSX über Tailwind-Klassen hinzugefügt.
-*/
-.video-masked-text {
-  background: url('/glitch.mp4') no-repeat;
-  background-size: cover;
-  background-position: center;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
 }
